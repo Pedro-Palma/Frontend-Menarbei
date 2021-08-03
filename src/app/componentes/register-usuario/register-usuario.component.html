@@ -1,0 +1,43 @@
+
+<form>
+    <div class="logo-image">
+      <img src="../../../assets/img/registro.png" alt="Logo" title="Logo" width="115">
+    </div>
+    <br>
+    <h1 class="title">REGISTRO</h1>
+    <p class="subtitle">Llena todos los datos solicitados</p>
+    <div class="input-group mb-3">
+      <span class="input-group-text">@</span>
+      <input type="text" class="form-control" id="derecha" placeholder="Nombre"  aria-label="Username" name="name" #name="ngModel" [(ngModel)]="usuarioModel.name">
+      <span class="input-group-text">@</span>
+      <input type="text" class="form-control" placeholder="Apellido" aria-label="Server" name="lastName" #lastName="ngModel" [(ngModel)]="usuarioModel.lastName">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">@</span>
+      <input type="text" class="form-control" id="derecha" placeholder="Nombre de usuario" aria-label="Username" name="user" #user="ngModel" [(ngModel)]="usuarioModel.user">
+      <span class="input-group-text">*</span>
+      <input type="password" class="form-control" placeholder="Contraseña" aria-label="Server" name="password" #password="ngModel" [(ngModel)]="usuarioModel.password">
+    </div>    
+    <div class="input-group mb-3" >
+      <input type="text" class="form-control"  placeholder="Correo electronico" aria-label="Recipient's username" aria-describedby="basic-addon2" name="email" #email="ngModel" [(ngModel)]="usuarioModel.email">
+      <span class="input-group-text" id="basic-addon2">@example.com</span>
+    </div>
+      
+    <div class="input-group mb-3">
+      <span class="input-group-text">☏</span>
+      <input type="text" class="form-control"  id="derecha"placeholder="Telefono" aria-label="Server" name="phone" #phone="ngModel" [(ngModel)]="usuarioModel.phone">
+    
+      <span class="input-group-text">✺</span>
+      <input type="text" class="form-control" placeholder="Direccion" aria-label="Username" name="direction" #direction="ngModel" [(ngModel)]="usuarioModel.direction">
+    </div>
+    <br>
+    <div class="contendor">
+    <button type="button" routerLink="/login" class="button buttonBlue" (click)="registrar()" >Registrarse
+      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+  </div>
+    <p>
+      Ya tienes una cuenta?<a routerLink="/login" routerLinkActive="active"> Haz clic aquí</a>
+    </p>
+  </form>
+  

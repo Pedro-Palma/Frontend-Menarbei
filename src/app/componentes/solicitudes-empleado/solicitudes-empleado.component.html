@@ -1,0 +1,32 @@
+<h1 *ngIf="works">Solicitudes de trabajo</h1>
+<h1 *ngIf="!works">No hay solicitudes de trabajo</h1>
+<div class="container">
+
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4" *ngFor="let wk of works">
+        <div class="card mb-3" style="max-width: 21rem;">
+          <div class="card-heading">
+            Precio: {{wk.price}}
+          </div>
+          <div class="card-text">
+           Trabajo: {{wk.job.name}}
+          </div>
+          <div class="card-text">
+           Direccion: {{wk.direction}}
+          </div>
+          <div class="card-text">
+           Cliente: {{wk.client.name}}
+          </div>
+
+          <a [routerLink]="['/trabajoAceptado',wk._id]"  class="card-button">  <img src="../../../assets/img/signo-de-mas.png" alt=""></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+

@@ -1,0 +1,159 @@
+.container{
+  width: 90%;
+  background: #2c2c2caf;
+  margin: 0px auto ;
+  margin-top: 10px;
+  border-radius: 15px;
+  border: 1px solid #000000;
+	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
+
+.encabezado {
+  margin-top: 30px;
+  justify-content: center;
+}
+
+h1{
+  font-size:60px;
+
+}
+
+
+.precio{
+  margin-top: 20px;
+  text-align: right;
+  color: white;
+  margin-bottom: 20px;
+}
+#circulo{
+  margin-left: 30px;
+  vertical-align: middle;
+}
+.informacion{
+  margin-left: 30px;
+}
+.estatus{
+  display: flex;
+}
+
+.eliminar {
+  background: #F05945;
+  border-radius: 10rem;
+  margin: 10px;
+  padding: 3px 20px;
+  border-color: black;
+
+}
+.eliminar:hover { background: #893328; }
+
+.editar {
+  background: #FFE194;
+  border-radius: 10rem;
+  margin: 10px;
+  border-color: black;
+  padding: 3px 20px;
+
+}
+.editar:hover { background: #ab9663; }
+
+.nulo {
+  vertical-align: middle;
+  background: #848484;
+  border-radius: 10rem;
+  margin: 10px;
+  border-color: black;
+  padding: 3px 20px;
+
+}
+.nulo:hover { background: #5d5d5d; }
+
+.crear {
+  background: #29b86e;
+  border-radius: 10rem;
+  margin: 10px;
+  padding: 3px 20px;
+  border-color: black;
+
+}
+.crear:hover { background: #186f42; }
+.crears:hover { background: #186f42; }
+.crears {
+  background: #29b86e;
+  border-radius: 10rem;
+  margin: 10px;
+  padding: 3px 20px;
+  border-color: black;
+  font-size: 1.5rem;
+  height: 60px;
+
+}
+.crearss {
+  background: #29b86e63;
+  border-radius: 10rem;
+  margin: 10px;
+  padding: 3px 20px;
+  border-color: black;
+  font-size: 1.5rem;
+  height: 60px;
+  color: white;
+
+}
+
+
+
+
+  /* Ripples container */
+
+  .ripples {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+  }
+
+
+  /* Ripples circle */
+
+  .ripplesCircle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .ripples.is-active .ripplesCircle {
+    animation: ripples .4s ease-in;
+  }
+
+
+  /* Ripples animation */
+
+  @keyframes ripples {
+    0% { opacity: 0; }
+
+    25% { opacity: 1; }
+
+    100% {
+      width: 200%;
+      padding-bottom: 200%;
+      opacity: 0;
+    }
+  }
+
+  .logo-image, h1, p {
+    text-align: center;
+   color: white;
+  }
+
+  h4{
+    color: white;
+
+  }

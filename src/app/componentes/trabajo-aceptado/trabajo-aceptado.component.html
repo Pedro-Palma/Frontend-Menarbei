@@ -1,0 +1,168 @@
+<!--  TABLA DE TRABAJO             -->
+  <div class="container"  >
+    <div class="encabezado">
+    <h1 *ngIf="works" id="titulo">Area de trabajo: {{works.typeEmployee.name}}</h1>
+
+    </div>
+    <div class="precio">
+      <h2 *ngIf="works"> Precio: Q {{works.price}}.00</h2>
+    </div>
+
+    <div class="informacion">
+    <h4 *ngIf="works">Trabajo: {{works.job.name}} </h4>
+    <br>
+    <h4 *ngIf="works">Descripcion: {{works.descriptionJob}} </h4>
+    <br>
+    <h4 *ngIf="works">Direccion:  {{works.direction}}</h4>
+    <br>
+    <h4 *ngIf="works" >Cliente:  {{works.client.name}}</h4>
+
+    <h4 *ngIf="works  && works.status != 'SOLICITUD'" >Cambios: {{works.changes}} <span *ngIf="works.changes == null">No hay cambios</span> </h4>
+    <br>
+    <div class="estatus">
+      <br>
+      <br>
+      <br>
+    <h4   *ngIf="works">Estatus: <svg  *ngIf="works && works.status == 'CONFIRMADO_EMPLEADO'" id="circulo"version="1.1" xmlns="http://www.w3.org/2000/svg"
+      width="35" height="35" viewBox="0 0 120 120">
+   <circle cx="60" cy="60" r="50"
+           fill="Green" />
+ </svg>
+ <svg   *ngIf="works && works.status == 'CONFIRMADO'" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      width="35" height="35" viewBox="0 0 120 120">
+   <circle cx="60" cy="60" r="50"
+           fill="Blue" />
+ </svg>
+ <svg  *ngIf=" works && works.status == 'CONFIRMADO_CAMBIOS'" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      width="35" height="35" viewBox="0 0 120 120">
+   <circle cx="60" cy="60" r="50"
+           fill="Orange" />
+ </svg>
+
+ <svg   *ngIf="works && works.status == 'SOLICITUD'"  version="1.1" xmlns="http://www.w3.org/2000/svg"
+      width="35" height="35" viewBox="0 0 120 120">
+   <circle cx="60" cy="60" r="50"
+           fill="Yellow" />
+ </svg>      {{works.status}}</h4>
+
+
+    </div>
+    </div>
+
+
+
+  <button  *ngIf="works  && works.status != 'SOLICITUD'" type="button" class="eliminar"
+      data-bs-toggle="modal" data-bs-target="#modalCancelarSolicitud"  >Cancelar</button>
+      <button *ngIf="works  && works.status == 'SOLICITUD'" type="button" class="crear"
+      data-bs-toggle="modal" data-bs-target="#modalConfirmarSolicitud">Confirmar</button>
+      <button *ngIf="works  && works.status == 'SOLICITUD'" type="button" class="editar"
+      data-bs-toggle="modal" data-bs-target="#modalCambiosSolicitud">Hacer cambios y confirmar</button>
+      <button *ngIf="works  && works.status == 'CONFIRMADO'"id="cancelar"type="button" class="editar"
+      data-bs-toggle="modal" data-bs-target="#modalFinalizarSolicitud" >Finalizar</button>
+  </div>
+
+<!--  CANCELAR SOLICITUD           -->
+<div class="modal fade" id="modalCancelarSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header "style="background-color: #FFE194;">
+          <h5 class="modal-title" id="exampleModalLabel">Cancelar Solicitud</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Seguro que desea cancelar la solicitud?</label>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="nulo" data-bs-dismiss="modal">Regresar</button>
+          <button  type="button" class="crear"  data-bs-dismiss="modal" (click)="cancelChangesWorks()">Cancelar Solicitud</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  CONFIRMAR SOLICITUD           -->
+  <div class="modal fade" id="modalConfirmarSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #FFE194;">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Seguro que desea confirmar la solicitud?</label>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="nulo" data-bs-dismiss="modal">Cancelar</button>
+          <button  type="button" class="crear"  data-bs-dismiss="modal" (click)="aceptWorkE()">Confirmar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  hacer cambios y confirmar            -->
+
+<div class="modal fade" id="modalCambiosSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"style="background-color: #FFE194;">
+          <h5 class="modal-title" id="exampleModalLabel">Hacer cambios y confirmar</h5>
+
+        </div>
+        <div class="modal-body">
+          <form>
+
+              <div class="mb-3">
+                <label for="inputUsuario" class="form-label">cantidad a añadir al precio</label>
+                <input type="text" class="form-control" id="inputUsuario"
+                    name="price" #price="ngModel" [(ngModel)]="workModel.price">
+              </div>
+              <div class="mb-3">
+                <label for="inputUsuario" class="form-label">Cambios</label>
+                <textarea  class="form-control" placeholder="Escribe la razon del aumento del precio" id="floatingTextarea2" style="height: 100px"
+                name="changes" #changes="ngModel" [(ngModel)]="workModel.changes"></textarea>
+              </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+          <button type="button" class="crear"  data-bs-dismiss="modal" (click)="changesWorks()" >Guardar y confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  finaliar SOLICITUD           -->
+  <div class="modal fade" id="modalFinalizarSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #FFE194;">
+          <h5 class="modal-title" id="exampleModalLabel">Finalizar Solicitud</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Seguro que desea dar por finalizado el trabajo?</label>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="nulo" data-bs-dismiss="modal">Cancelar</button>
+          <button  type="button" class="crear"  data-bs-dismiss="modal" (click)="finishWord()" >Finalizar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>

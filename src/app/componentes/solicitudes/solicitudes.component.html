@@ -1,0 +1,209 @@
+<div *ngIf="!works">
+<h1 class="mt-5 " > <u>No tiene una solicitud de trabajo! </u></h1>
+</div>
+<div *ngIf="works">
+  <h1 class="mt-3" > <u> Solicitud de trabajo! </u></h1>
+  </div>
+
+<button type="button" class=" crears m-5" data-bs-toggle="modal" data-bs-target="#modalCrearSolicitud" *ngIf="!works">Crear una
+  solicitud</button>
+  <button type="button" class=" crearss m-5 " data-bs-toggle="modal" data-bs-target="#modalCrearSolicitud" *ngIf="works" disabled>Crear una
+    solicitud</button>
+<!-- Modal registrar Admin -->
+<div class="modal fade" id="modalCrearSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Solicitud</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">Area de trabajo</label>
+            <select  (change)="listJobByType($event.target.value)" class="form-select" name="typeEmployee" #typeEmployee="ngModel" [(ngModel)]="workModel.typeEmployee._id"  >
+
+              <option >elija una opcion</option>
+              <option  *ngFor="let emp of employees"  [value]="emp._id">{{emp.name}}</option>
+          </select>
+          </div>
+          <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Trabajo</label>
+              <select   (change)="listJobById($event.target.value)"class="form-select" name="job" #job="ngModel" [(ngModel)]="workModel.job._id"  >
+
+                  <option >elija una opcion</option>
+                  <option *ngFor="let jb of jobs"  [value]="jb._id">{{jb.name}}</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Direcion</label>
+              <input   type="text" class="form-control" id="inputUsuario"
+              name="direction" #direction="ngModel" [(ngModel)]="workModel.direction">
+            </div>
+
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Descripcion</label>
+              <textarea  name="description" #description="ngModel" [(ngModel)]="workModel.description"class="form-control" placeholder="Escribe indicaciones para la realizacion del trabajo" id="floatingTextarea2" style="height: 100px"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Precio</label>
+              <input *ngIf="jobsPrice != null"  placeholder="Q {{jobsPrice.price}}.00"  type="text" class="form-control" id="inputUsuario"
+              disabled>
+            </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+        <button type="button" class="crear"  data-bs-dismiss="modal" (click)="crearSolicitud()" >Crear solicitud</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" *ngFor="let wk of works">
+
+  <div class="encabezado" >
+    <h1 id="titulo">Area de trabajo: {{wk.typeEmployee.name}}</h1>
+
+  </div>
+  <div class="precio">
+    <h2 >Precio: Q {{wk.price}}.00</h2>
+  </div>
+
+  <div class="informacion">
+    <h4>Trabajo: {{wk.job.name}} </h4>
+    <br>
+    <h4>Descripcion: {{wk.descriptionJob}}</h4>
+    <br>
+    <h4>Direccion: {{wk.direction}}</h4>
+    <br>
+    <h4 *ngIf="wk.status != 'SOLICITUD'" [routerLink]="['/perfilSeleccionado',wk.employee._id]">Empleado: {{wk.employee.name}}</h4>
+    <br>
+    <h4 *ngIf="wk.status != 'SOLICITUD'">Cambios: {{wk.changes}} <span *ngIf="wk.changes == null">No hay cambios</span>
+    </h4>
+    <br>
+    <div class="estatus">
+      <br>
+      <br>
+      <br>
+
+
+      <h4 >Estatus:  <svg *ngIf="wk.status == 'CONFIRMADO_EMPLEADO'" id="circulo" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        width="35" height="35" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="Green" />
+      </svg>
+      <svg *ngIf="wk.status == 'CONFIRMADO'" version="1.1" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+        viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="Blue" />
+      </svg>
+      <svg *ngIf="wk.status == 'CONFIRMADO_CAMBIOS'" version="1.1" xmlns="http://www.w3.org/2000/svg" width="35"
+        height="35" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="Orange" />
+      </svg>
+
+      <svg *ngIf="wk.status == 'SOLICITUD'" version="1.1" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+        viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="Yellow" />
+      </svg> <span *ngIf="wk.status == 'SOLICITUD'" >En solicitud</span><span
+          *ngIf="wk.status == 'CONFIRMADO_EMPLEADO'">El trabajador acepto el trabajo</span><span
+          *ngIf="wk.status == 'CONFIRMADO'">La solicitud de trabajo esta a espera de su finalización</span>
+          <span
+          *ngIf="wk.status == 'CONFIRMADO_CAMBIOS'">  La solicitud  espera de su confirmación de los cambios</span>
+        </h4>
+
+
+    </div>
+  </div>
+
+
+  <button id="cancelar" type="button" class="eliminar" data-bs-toggle="modal"
+    data-bs-target="#modalCancelarSolicitud">Cancelar Trabajo</button>
+
+ <button *ngIf=" wk.status != 'SOLICITUD' && wk.status != 'CONFIRMADO'" type="button" class="editar" data-bs-toggle="modal"
+    data-bs-target="#modalConfirmarSolicitud">Confirmar</button>
+
+  <button *ngIf=" wk.status == 'CONFIRMADO_CAMBIOS'" type="button" class="crear" data-bs-toggle="modal"
+    data-bs-target="#modalCancelarCambios">Cancelar Cambios</button>
+
+</div>
+
+<!-- cencelar solicitud-->
+<div class="modal fade" id="modalCancelarSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Cancelar cambios</h5>
+
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">Seguro que desea cancelar los cambios de su solicitud?</label>
+
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+        <button   *ngFor="let wor of works" type="button" class="eliminar"  data-bs-dismiss="modal" (click)="cancelWork(wor._id)" >Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  CONFIRMAR SOLICITUD           -->
+<div class="modal fade" id="modalConfirmarSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">Seguro que desea confirmar la solicitud?</label>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">Cancelar</button>
+        <button *ngFor="let wor of works" type="button" class="crear" data-bs-dismiss="modal"
+          (click)="aceptWorkC(wor._id)">Confirmar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--  Cancelar cambios           -->
+<div class="modal fade" id="modalCancelarCambios" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">Seguro que desea confirmar la solicitud?</label>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">Cancelar</button>
+        <button *ngFor="let wor of works" type="button" class="crear" data-bs-dismiss="modal"
+          (click)="cancelChangesWorks(wor._id)">Confirmar</button>
+
+      </div>
+    </div>
+  </div>
+</div>

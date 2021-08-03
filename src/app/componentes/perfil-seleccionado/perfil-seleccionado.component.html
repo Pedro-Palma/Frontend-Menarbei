@@ -1,0 +1,208 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<div  class="container ">
+  <div class="titulo1">
+  <h1 class="text-center mb-5">Perfil del usuario</h1>
+</div>
+
+  <div class="main-body">
+
+
+        <!-- Breadcrumb -->
+
+        <!-- /Breadcrumb -->
+
+        <div class="row gutters-sm">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img id="perf" src="../../../assets/img/profile-user.png" alt="Admin" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h4 *ngIf="usuarioModel">{{usuarioModel.user}}</h4>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="titulo">
+                  <h3 *ngIf="usuarioModel">Perfil de {{usuarioModel.name}}</h3>
+                  <hr>
+                </div>
+
+                  <div  class="col-sm-3">
+
+                    <h6 class="mb-0">Nombre</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary" *ngIf="usuarioModel">
+                    {{usuarioModel.name}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Apellido</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary"*ngIf="usuarioModel">
+                    {{usuarioModel.lastName}}
+                  </div>
+                </div>
+
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary"*ngIf="usuarioModel">
+                    {{usuarioModel.email}}
+                  </div>
+                </div>
+
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Telefono</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary"*ngIf="usuarioModel">
+                    (+502) {{usuarioModel.phone}}
+                  </div>
+                </div>
+
+                <hr *ngIf="usuarioModel && usuarioModel.role == 2">
+                <div  *ngIf="usuarioModel && usuarioModel.role == 2" class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Tipo Empleado</h6>
+                  </div>
+                  <div  class="col-sm-9 text-secondary"*ngIf=" usuarioModel.role == 2">
+                    {{usuarioModel.typeEmployee.name}}
+                  </div>
+                </div>
+                <hr>
+
+
+              </div>
+            </div>
+
+            <div class="row gutters-sm mb-5">
+              <div class="col-xxl">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h4 class="d-flex align-items-center mb-3">Reseñas del usuario</h4>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">No.</th>
+                          <th scope="col">Comentario</th>
+
+                        </tr>
+                      </thead>
+                      <tbody *ngIf="usuarioModel">
+                        <tr *ngFor="let co of usuarioModel.rewiews , index as id " >
+                          <th scope="row">{{id+1}}</th>
+                          <td >{{co.coment}}</td>
+                        </tr>
+
+                      </tbody>
+
+                    </table>
+                    <button class="btn btn-primary mt-1 " data-bs-toggle="modal" data-bs-target="#modalEditarUsuario">Agregar Comentario</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+
+   <!-- Modal Editar Usuario->
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="inputUsuario" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="inputUsuario"
+          name="name" #name="ngModel" [(ngModel)]="usuarioModel.name">
+        </div>
+        <div class="mb-3">
+          <label for="inputUsuario" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="inputUsuario"
+          name="lastName" #lastName="ngModel" [(ngModel)]="usuarioModel.lastName">
+        </div>
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Email</label>
+          <input type="email" class="form-control" id="inputEmail"
+          name="email" #email="ngModel" [(ngModel)]="usuarioModel.email">
+        </div>
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Telefono</label>
+          <input type="text" class="form-control" id="inputEmail"
+          name="phone" #phone="ngModel" [(ngModel)]="usuarioModel.phone">
+        </div>
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Direccion</label>
+          <input type="email" class="form-control" id="inputEmail"
+          name="direction" #direction="ngModel" [(ngModel)]="usuarioModel.direction">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+      <button type="button" class="btn btn-primary"  (click)="editarUsuario()">Guardar Cambios</button>
+    </div>
+  </div>
+</div>
+</div>-->
+
+
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="inputEmail"
+            name="rewiews" #rewiews="ngModel" [(ngModel)]="modeloComentario.coment">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+        <button type="button" class="btn btn-primary"  (click)="addComent()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,107 @@
+
+
+
+<div class="contenedor">
+  <div class="titulo">
+    <h1>TRABAJADORES</h1>
+    <hr>
+  </div>
+  <div class="titulo mt-5" *ngIf="usuarios && usuarios.length == 0">
+
+    <h1 class="mb-5">No hay trabajadores !</h1>
+
+  </div>
+  <br>
+  <table id="customers" *ngIf="usuarios && usuarios.length > 0">
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Direccion</th>
+      <th>Telefono</th>
+      <th>Usuario</th>
+      <th>Email</th>
+      <th>Rol</th>
+      <th>Acciones</th>
+    </tr>
+    <tr *ngFor="let usua of usuarios">
+      <td >{{ usua.name}}</td>
+      <td>{{ usua.lastName }}</td>
+      <td>{{ usua.direction}}</td>
+      <td>{{ usua.phone}}</td>
+      <td>{{ usua.user }}</td>
+      <td>{{ usua.email}}</td>
+      <td> <span *ngIf="usua.role == 0">Admin</span> <span *ngIf="usua.role == 2">Trabajador</span> </td>
+      <td>
+      <div class="btn-group"   aria-label="Basic example">
+        <button type="button" class="editar" (click)="obtenerUsuarioId(usua._id)"
+      data-bs-toggle="modal" data-bs-target="#modalEditarUsuario">Editar</button>
+        <button type="button"class="eliminar" id="crud"
+        data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario" (click)="obtenerUsuarioId(usua._id)">Eliminar</button>
+
+      </div>
+    </td>
+    </tr>
+    <hr>
+    <hr>
+  </table>
+</div>
+
+
+   <!-- Modal Editar Usuario -->
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"  style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Trabajador: {{ usuarioModel.user }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="inputUsuario"
+            name="user" #user="ngModel" [(ngModel)]="usuarioModel.user">
+          </div>
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail"
+            name="email" #email="ngModel" [(ngModel)]="usuarioModel.email">
+          </div>
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="inputEmail"
+            name="name" #name="ngModel" [(ngModel)]="usuarioModel.name">
+          </div>
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="inputEmail"
+            name="lastName" #lasName="ngModel" [(ngModel)]="usuarioModel.lastName">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+        <button type="button" class="editar" data-bs-dismiss="modal"  (click)="editarUsuario()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal Eliminar Usuario -->
+<div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"  style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Trabajador: {{ usuarioModel.user }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro de que desea eliminar el trabajador: {{ usuarioModel.user }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">No</button>
+        <button type="button" class="eliminar" data-bs-dismiss="modal"
+        (click)="eliminarUsuario(usuarioModel._id)">Si, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

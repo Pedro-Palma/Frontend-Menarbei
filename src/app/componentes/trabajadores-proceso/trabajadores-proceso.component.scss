@@ -1,0 +1,92 @@
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 85%;
+  margin: 40px auto;
+}
+
+#customers td, #customers th {
+  border: 1px solid rgb(0, 0, 0);
+  padding: 8px;
+  height: 60px;
+  text-align: center;
+}
+
+
+
+#customers tr{background-color: #f2f2f2;
+}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #FFE194;;
+  color: rgb(0, 0, 0);
+}
+
+
+
+
+
+
+/* Button modifiers */
+
+.eliminar {
+  background: #F05945;
+  border-radius: 10rem;
+  margin: 10px;
+  padding: 3px 20px;
+  border-color: black;
+
+}
+.eliminar:hover { background: #893328; }
+
+.editar {
+  background: #FFE194;
+  border-radius: 10rem;
+  margin: 10px;
+  border-color: black;
+  padding: 3px 20px;
+
+}
+.editar:hover { background: #ab9663; }
+
+.nulo {
+  vertical-align: middle;
+  background: #848484;
+  border-radius: 10rem;
+  margin: 10px;
+  border-color: black;
+  padding: 3px 20px;
+
+}
+.nulo:hover { background: #5d5d5d; }
+
+.crear {
+  background: #29b86e;
+  border-radius: 10rem;
+  margin: 10px;
+  padding: 3px 20px;
+  border-color: black;
+
+}
+.crear:hover { background: #186f42; }
+
+.contenedor{
+
+    width: 90%;
+    background: #2c2c2caf;
+    margin: 0px auto ;
+    margin-top: 50px;
+    border-radius: 15px;
+}
+
+.titulo{
+  height: 50px;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}

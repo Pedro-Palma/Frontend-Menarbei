@@ -1,0 +1,77 @@
+<div class="header">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFE194;">
+    <div class="container-fluid">
+      <!-- <a routerLink="Login"><img src="./assets/image/as.jpg." alt="" width="50" height="51"></a> -->
+      <a class="navbar-brand hotel" routerLink="home"><i class="fas fa-home"></i><strong> MENARBEIT </strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <div class="inicio">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="margin-right: 30px;" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <strong> Inicio de sesión </strong>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" routerLink="login">Login</a></li>
+                <li><a class="dropdown-item" routerLink="/tipoCuenta">Registrarse</a></li>
+
+                <div *ngIf="_usuarioService.getIdentidad()">
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" [routerLink]="['/perfil', _usuarioService.getIdentidad()._id]" ><i
+                      class="fas fa-user-circle" ></i> Perfil</a></li>
+                  <li *ngIf="_usuarioService.getIdentidad() && _usuarioService.getIdentidad().role == 1 || _usuarioService.getIdentidad().role == 2"><a
+                      class="dropdown-item" ><i class="fas fa-futbol">
+                      </i> Solicitudes</a></li>
+                </div>
+
+                <div *ngIf="_usuarioService.getIdentidad()">
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" (click)="limpiarStorage()" ><i class="fas fa-lock"></i>
+                      Cerrar Sesión</a></li>
+                </div>
+
+              </ul>
+            </li>
+          </div>
+          <div  class="itemNav" *ngIf="_usuarioService.getIdentidad() && _usuarioService.getIdentidad().role == 1">
+            <a routerLink="/solicitud" class="nav-link usuario">
+              <i class="fas fa-table"></i><strong> Solicitudes </strong></a>
+          </div>
+          <div  class="itemNav" *ngIf="_usuarioService.getIdentidad() &&  _usuarioService.getIdentidad().role == 2 ">
+            <a routerLink="/solicitudesEmpleado" class="nav-link usuario">
+              <i class="fas fa-table"></i><strong> Trabajos </strong></a>
+          </div>
+          <div  class="itemNav" *ngIf="_usuarioService.getIdentidad() && _usuarioService.getIdentidad().role == 0 ">
+            <div class="inicio">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="margin-right: 30px;" href="#" id="navbarDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <strong> Administracion </strong>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" routerLink="/listaUsuarios">Usuarios</a></li>
+                  <li><a class="dropdown-item" routerLink="/listaTrabajadores">Trabajadores</a></li>
+                  <li><a class="dropdown-item" routerLink="/listaTrabajadoresP">Trabajadores por confirmar</a></li>
+                  <li><a class="dropdown-item" routerLink="/typeEmployee">Oficios</a></li>
+                  <li><a class="dropdown-item" routerLink="/listaJob">Tipo de trabajos</a></li>
+  
+                </ul>
+              </li>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+  

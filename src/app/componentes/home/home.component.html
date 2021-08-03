@@ -1,0 +1,15 @@
+<form class="inicio" id="inicio">
+    <div class="content">
+        <h3>Bienvenido <br><span>Menarbeit</span></h3><p>Menarbeit es una aplicación que te ayuda a buscar una solución a los trabajos que pueden
+        ser tediosos de resolver. Con la ayuda de gente seleccionada podemos garantizarte
+        que tareas relacionadas con áreas como mécanica, jardinería o carpintería seran resueltas.</p>
+        <a *ngIf="_usuarioService.getIdentidad()" class="btn" routerLink="/solicitud"routerLinkActive="active"> Contratar un servicio</a>
+        <a *ngIf="_usuarioService.getIdentidad() == null" class="btn" routerLink="/login"routerLinkActive="active"> IniciarSesion</a>
+
+    </div>
+    <div class="image">
+        <img src="../../../assets/img/humano.png" alt="">
+    </div>
+
+
+</form>

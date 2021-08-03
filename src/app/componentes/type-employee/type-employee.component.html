@@ -1,0 +1,115 @@
+<div class="contenedor">
+  <div class="titulo">
+    <h1>Áreas de trabajo</h1>
+
+
+  </div>
+  <button type="button" class="crear"
+  data-bs-toggle="modal" data-bs-target="#modalCrearTypeEmployee">Crear nuevo oficio</button>
+  <hr>
+  <div class="titulo mt-5" *ngIf="!typeEmployees">
+
+    <h1 class="mb-5">No hay áreas de trabajo!</h1>
+
+  </div>
+
+  <br>
+
+  <table id="customers" *ngIf="typeEmployees && typeEmployees.length > 0">
+
+
+
+    <tr>
+      <th>Nombre</th>
+      <th>Acciones</th>
+    </tr>
+    <tr *ngFor="let emp of typeEmployees">
+      <td>{{ emp.name}}</td>
+      <td>
+      <div class="btn-group"   aria-label="Basic example">
+        <button type="button" class="editar"(click)="listEmployeeId(emp._id)"
+      data-bs-toggle="modal" data-bs-target="#modalEditarEmployee">Editar</button>
+        <button type="button"class="eliminar" id="crud"
+        data-bs-toggle="modal" data-bs-target="#modalEliminarEmployee" (click)="listEmployeeId(emp._id)">Eliminar</button>
+
+      </div>
+    </td>
+    </tr>
+    <hr>
+    <hr>
+  </table>
+</div>
+
+
+
+  <!-- Modal Editar Usuario -->
+<div class="modal fade" id="modalEditarEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"  style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Trabajo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="inputUsuario"
+            name="name" #name="ngModel" [(ngModel)]="employeeModel.name">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+        <button type="button" class="editar"  (click)="editarEmployee()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal Eliminar Usuario -->
+<div class="modal fade" id="modalEliminarEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"  style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Oficio: {{ employeeModel.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Â¿Esta seguro de que desea eliminar el oficio: {{ employeeModel.name }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">No</button>
+        <button type="button" class="editar" data-bs-dismiss="modal"
+        (click)="eliminarEmployee(employeeModel._id)">Si, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal registrar Admin -->
+<div class="modal fade" id="modalCrearTypeEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"  style="background-color: #FFE194;">
+          <h5 class="modal-title" id="exampleModalLabel">Crear nueva area de trabajo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="inputUsuario"
+              name="name" #name="ngModel" [(ngModel)]="employeeModel.name">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+          <button type="button" class="crear" data-bs-dismiss="modal" (click)="crearTypeEmployee()" >Crear Oficio</button>
+        </div>
+      </div>
+    </div>
+  </div>

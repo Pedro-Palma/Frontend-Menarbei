@@ -1,0 +1,141 @@
+<div class="contenedor">
+  <div class="titulo">
+    <h1>TIPOS DE TRABAJOS</h1>
+    <hr>
+  </div>
+  <div class="titulo mt-5" *ngIf="!jobs">
+
+    <h1 class="mb-5">No hay trabajos!</h1>
+
+  </div>
+  <br>
+  <button type="button" class="crear"
+  data-bs-toggle="modal" data-bs-target="#modalCrearJob">Crear un nuevo trabajo</button>
+  <table id="customers" *ngIf="jobs && jobs.length > 0">
+
+
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+    <tr *ngFor="let usua of jobs">
+      <td >{{ usua.name}}</td>
+      <td>{{ usua.description}}</td>
+      <td>Q {{ usua.price}}.00</td>
+      <td>
+      <div class="btn-group"   aria-label="Basic example">
+        <button type="button" class="editar" (click)="listJobId(usua._id)"
+      data-bs-toggle="modal" data-bs-target="#modalEditarUsuario">Editar</button>
+        <button type="button"class="eliminar" id="crud"
+        data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario" (click)="listJobId(usua._id)">Eliminar</button>
+
+      </div>
+    </td>
+    </tr>
+    <hr>
+    <hr>
+  </table>
+</div>
+
+  <!-- Modal Editar Usuario -->
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">nombre</label>
+            <input type="text" class="form-control" id="inputUsuario"
+            name="name" #name="ngModel" [(ngModel)]="jobModel.name">
+          </div>
+          <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Decripcion</label>
+              <input type="text" class="form-control" id="inputUsuario"
+              name="description" #description="ngModel" [(ngModel)]="jobModel.description">
+            </div>
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Precio</label>
+              <input type="text" class="form-control" id="inputUsuario"
+              name="price" #price="ngModel" [(ngModel)]="jobModel.price">
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+        <button type="button"   data-bs-dismiss="modal" class="editar"  (click)="editarJob()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal Eliminar Usuario -->
+<div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #FFE194;">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Â¿Esta seguro de que desea eliminar el trabajo: {{ jobModel.name }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="nulo" data-bs-dismiss="modal">No</button>
+        <button type="button" class="eliminar" data-bs-dismiss="modal"
+        (click)="eliminarJob(jobModel._id)">Si, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal registrar Admin -->
+<div class="modal fade" id="modalCrearJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #FFE194;">
+          <h5 class="modal-title" id="exampleModalLabel">Crear nuevo trabajo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputUsuario" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="inputUsuario"
+              name="name" #name="ngModel" [(ngModel)]="jobModel.name">
+            </div>
+            <div class="mb-3">
+                <label for="inputUsuario" class="form-label">Decripcion</label>
+                <input type="text" class="form-control" id="inputUsuario"
+                name="description" #description="ngModel" [(ngModel)]="jobModel.description">
+              </div>
+              <div class="mb-3">
+                <label for="inputUsuario" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="inputUsuario"
+                name="price" #price="ngModel" [(ngModel)]="jobModel.price">
+              </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Oficios</span>
+
+                  <select class="form-select"  name="typeEmployee" #typeEmployee="ngModel" [(ngModel)]="jobModel.typeEmployee">
+
+                    <option  *ngFor="let emp of typeEmployees" [value]="emp._id" >{{emp.name}}</option>
+
+                  </select>
+                </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="nulo" data-bs-dismiss="modal">cerrar</button>
+          <button type="button" class="crear" data-bs-dismiss="modal" (click)="crearJob()" >Crear trabajo</button>
+        </div>
+      </div>
+    </div>
+  </div>
